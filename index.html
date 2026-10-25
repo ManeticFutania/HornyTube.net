@@ -83,6 +83,14 @@
         }
         .card-wrapper { display: flex; flex-direction: column; align-items: center; }
         .card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.7rem; }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            max-width: 260px;
+            display: block;
+        }
         .card {
             background: #fff;
             color: #222;
@@ -90,28 +98,19 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.45);
             width: 100%;
-            max-width: 260px;
             min-height: 340px;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-link:hover .card {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.55);
         }
         .card img { width: 100%; height: 150px; object-fit: cover; }
         .card-body { padding: 1.1rem 1rem 1.3rem; text-align: left; flex: 1; display: flex; flex-direction: column; }
         .card-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
         .card-body p { font-size: 0.88rem; line-height: 1.4; color: #444; flex: 1; }
-        .btn {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.45rem 1.1rem;
-            background: #fff;
-            color: #5a67d8;
-            border: 2px solid #5a67d8;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.88rem;
-            align-self: flex-start;
-        }
-        .btn:hover { background: #5a67d8; color: #fff; }
     </style>
 </head>
 <body>
@@ -131,47 +130,54 @@
         <div class="cards">
             <div class="card-wrapper">
                 <div class="card-title">Manetic</div>
-                <div class="card">
-                    <img src="https://placehold.co/400x250/4a90e2/ffffff?text=Manetic" alt="Manetic">
-                    <div class="card-body">
-                        <h3>Manetic</h3>
-                        <p>A channel for man with pussy (FTM / Cuntboy) lovers.</p>
-                        <a href="#" class="btn">Read More</a>
+                <a href="/manetic.html" class="card-link">
+                    <div class="card">
+                        <img src="https://placehold.co/400x250/4a90e2/ffffff?text=Manetic" alt="Manetic">
+                        <div class="card-body">
+                            <h3>Manetic</h3>
+                            <p>A channel for man with pussy (FTM / Cuntboy) lovers.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
             <div class="card-wrapper">
                 <div class="card-title">Futania</div>
-                <div class="card">
-                    <img src="https://placehold.co/400x250/e74c3c/ffffff?text=Futania" alt="Futania">
-                    <div class="card-body">
-                        <h3>Futania</h3>
-                        <p>The best Futa channel</p>
-                        <a href="#" class="btn">Read More</a>
+                <a href="/futania.html" class="card-link">
+                    <div class="card">
+                        <img src="https://placehold.co/400x250/e74c3c/ffffff?text=Futania" alt="Futania">
+                        <div class="card-body">
+                            <h3>Futania</h3>
+                            <p>The best Futa channel</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
             <div class="card-wrapper">
                 <div class="card-title">Manetic Cis</div>
-                <div class="card">
-                    <img src="https://placehold.co/400x250/27ae60/ffffff?text=Manetic+Cis" alt="Manetic Cis">
-                    <div class="card-body">
-                        <h3>Manetic Cis</h3>
-                        <p>It's Manetic but with cis men</p>
-                        <a href="#" class="btn">Read More</a>
+                <a href="/manetic-cis.html" class="card-link">
+                    <div class="card">
+                        <img src="https://placehold.co/400x250/27ae60/ffffff?text=Manetic+Cis" alt="Manetic Cis">
+                        <div class="card-body">
+                            <h3>Manetic Cis</h3>
+                            <p>It's Manetic but with cis men</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
             <div class="card-wrapper">
                 <div class="card-title">PhurryBros</div>
-                <div class="card">
-                    <img src="https://placehold.co/400x250/8e44ad/ffffff?text=PhurryBros" alt="PhurryBros">
-                    <div class="card-body">
-                        <h3>PhurryBros</h3>
-                        <p>Monsters can be pregnant too!</p>
-                        <a href="#" class="btn">Read More</a>
+                <a href="/phurrybros.html" class="card-link">
+                    <div class="card">
+                        <img src="https://placehold.co/400x250/8e44ad/ffffff?text=PhurryBros" alt="PhurryBros">
+                        <div class="card-body">
+                            <h3>PhurryBros</h3>
+                            <p>Monsters can be pregnant too!</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -196,7 +202,6 @@
             video.addEventListener('canplaythrough', showPage, { once: true });
         }
 
-        // Safety fallback
         setTimeout(showPage, 6000);
     </script>
 </body>

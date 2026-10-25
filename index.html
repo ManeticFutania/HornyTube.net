@@ -24,9 +24,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
-        #loading.hidden { opacity: 0; pointer-events: none; }
+        #loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
         .spinner {
             width: 46px;
             height: 46px;
@@ -115,7 +118,7 @@
         <div class="loading-text">Loading...</div>
     </div>
 
-    <video id="smoke-video" muted loop playsinline autoplay preload="auto">
+    <video id="smoke-video" muted loop playsinline autoplay preload="metadata">
         <source src="/assets/smoke.mp4" type="video/mp4">
     </video>
 
@@ -181,27 +184,18 @@
             loading.classList.add('hidden');
         }
 
-        function forcePlay() {
-            video.play().then(() => {
-                console.log('Video started');
-                hideLoading();
-            }).catch(err => {
-                console.warn('Autoplay blocked or failed:', err);
-                hideLoading();
-            });
+        // Always hide loading after 3 seconds no matter what
+        setTimeout(hideLoading, 3000);
+
+        // Try to play the video
+        function tryPlay() {
+            video.play().catch(() => {});
         }
 
-        video.addEventListener('loadeddata', forcePlay);
-        video.addEventListener('canplay', forcePlay);
-        video.addEventListener('error', () => {
-            console.error('Video error:', video.error);
-            hideLoading();
-        });
-
-        // Multiple force attempts
-        setTimeout(forcePlay, 500);
-        setTimeout(forcePlay, 2000);
-        setTimeout(hideLoading, 4000); // always hide loading eventually
+        video.addEventListener('loadeddata', tryPlay);
+        video.addEventListener('canplay', tryPlay);
+        setTimeout(tryPlay, 500);
+        setTimeout(tryPlay, 1500);
     </script>
 </body>
 </html>

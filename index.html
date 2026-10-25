@@ -174,9 +174,10 @@
         <div class="loading-text">Loading...</div>
     </div>
 
-    <video id="smoke-video" muted loop playsinline preload="auto">
-        <source src="/assets/smoke.mp4" type="video/mp4">
-    </video>
+    <video id="smoke-video" muted loop playsinline autoplay preload="auto" style="opacity: 0.75; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+    <source src="/assets/smoke.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
     <div class="content" id="content">
         <h1>HornyTube<br>Channels</h1>
@@ -234,35 +235,39 @@
     </div>
 
     <script>
-        const video = document.getElementById('smoke-video');
-        const loading = document.getElementById('loading');
-        const content = document.getElementById('content');
+    const video = document.getElementById('smoke-video');
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('content');
 
-        // Slow the video slightly
-        video.playbackRate = 0.7;
+    video.playbackRate = 0.7;
 
-        function showPage() {
-            video.classList.add('ready');
-            content.classList.add('ready');
-            loading.classList.add('hidden');
+    function showPage() {
+        if (loading) loading.classList.add('hidden');
+        if (content) content.classList.add('ready');
+        video.style.opacity = '0.75';
+    }
 
-            // Start video after it's ready
-            video.play().catch(() => {
-                // Autoplay may be blocked; ignore
-            });
-        }
-
-        // Wait until the video can play through
-        if (video.readyState >= 3) {
+    // Force play attempts
+    function tryPlay() {
+        video.play().then(() => {
+            console.log('Video playing');
             showPage();
-        } else {
-            video.addEventListener('canplaythrough', showPage, { once: true });
-        }
-
-        // Fallback in case canplaythrough never fires
-        window.addEventListener('load', () => {
-            setTimeout(showPage, 300);
+        }).catch(err => {
+            console.warn('Play failed:', err);
+            showPage(); // still show the page
         });
-    </script>
+    }
+
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('canplay', tryPlay);
+    video.addEventListener('error', (e) => {
+        console.error('Video error:', video.error);
+        showPage();
+    });
+
+    // Extra force after a short delay
+    setTimeout(tryPlay, 1000);
+    setTimeout(tryPlay, 3000);
+</script>
 </body>
 </html>

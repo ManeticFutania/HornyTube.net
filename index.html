@@ -49,7 +49,7 @@
             opacity: 0;
             transition: opacity 0.6s ease;
         }
-        #smoke-video.ready { opacity: 0.75; }
+        #smoke-video.ready { opacity: 0.65; }
 
         .content {
             position: relative;
@@ -81,7 +81,26 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        .card-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .card-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-40px);
+            animation: cardSlide 0.7s ease forwards;
+        }
+        .card-wrapper:nth-child(1) { animation-delay: 0.1s; }
+        .card-wrapper:nth-child(2) { animation-delay: 0.2s; }
+        .card-wrapper:nth-child(3) { animation-delay: 0.3s; }
+        .card-wrapper:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardSlide {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.7rem; }
 
         .card-link {
@@ -101,13 +120,17 @@
             min-height: 340px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         .card-link:hover .card {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.55);
         }
-        .card img { width: 100%; height: 150px; object-fit: cover; }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
         .card-body { padding: 1.1rem 1rem 1.3rem; text-align: left; flex: 1; display: flex; flex-direction: column; }
         .card-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
         .card-body p { font-size: 0.88rem; line-height: 1.4; color: #444; flex: 1; }
@@ -196,13 +219,8 @@
             video.play().catch(() => {});
         }
 
-        if (video.readyState >= 3) {
-            showPage();
-        } else {
-            video.addEventListener('canplaythrough', showPage, { once: true });
-        }
-
-        setTimeout(showPage, 6000);
+        window.addEventListener('load', showPage);
+        setTimeout(showPage, 8000);
     </script>
 </body>
 </html>

@@ -13,10 +13,8 @@
             font-family: Arial, Helvetica, sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Loading screen */
         #loading {
             position: fixed;
             inset: 0;
@@ -26,44 +24,28 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.5s ease;
         }
-        #loading.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
+        #loading.hidden { opacity: 0; pointer-events: none; }
         .spinner {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             border: 4px solid rgba(255,255,255,0.2);
             border-top-color: #fff;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.9s linear infinite;
         }
-        .loading-text {
-            margin-top: 1.2rem;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        .loading-text { margin-top: 1rem; font-size: 1rem; opacity: 0.75; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Smoke video background */
         #smoke-video {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             z-index: 0;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-        #smoke-video.ready {
             opacity: 0.75;
         }
 
@@ -72,11 +54,6 @@
             z-index: 1;
             padding: 4rem 1.5rem 3rem;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.8s ease 0.2s;
-        }
-        .content.ready {
-            opacity: 1;
         }
 
         h1 {
@@ -85,7 +62,6 @@
             line-height: 1.1;
             margin-bottom: 0.3rem;
         }
-
         .underline {
             width: 90px;
             height: 4px;
@@ -93,30 +69,15 @@
             margin: 0.6rem auto 3.5rem;
             border-radius: 2px;
         }
-
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2.2rem;
             max-width: 1100px;
             margin: 0 auto;
-            align-items: stretch;
         }
-
-        .card-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-            min-height: 1.6rem;
-        }
-
+        .card-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.7rem; }
         .card {
             background: #fff;
             color: #222;
@@ -125,31 +86,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.45);
             width: 100%;
             max-width: 260px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
             min-height: 340px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            display: block;
-            flex-shrink: 0;
-        }
-
-        .card-body {
-            padding: 1.1rem 1rem 1.3rem;
-            text-align: left;
-            flex: 1;
             display: flex;
             flex-direction: column;
         }
-
+        .card img { width: 100%; height: 150px; object-fit: cover; }
+        .card-body { padding: 1.1rem 1rem 1.3rem; text-align: left; flex: 1; display: flex; flex-direction: column; }
         .card-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
         .card-body p { font-size: 0.88rem; line-height: 1.4; color: #444; flex: 1; }
-
         .btn {
             display: inline-block;
             margin-top: 1rem;
@@ -160,11 +104,8 @@
             border-radius: 6px;
             text-decoration: none;
             font-size: 0.88rem;
-            font-weight: 500;
-            transition: background 0.2s, color 0.2s;
             align-self: flex-start;
         }
-
         .btn:hover { background: #5a67d8; color: #fff; }
     </style>
 </head>
@@ -174,12 +115,11 @@
         <div class="loading-text">Loading...</div>
     </div>
 
-    <video id="smoke-video" muted loop playsinline autoplay preload="auto" style="opacity: 0.75; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
-    <source src="/assets/smoke.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+    <video id="smoke-video" muted loop playsinline autoplay preload="auto">
+        <source src="/assets/smoke.mp4" type="video/mp4">
+    </video>
 
-    <div class="content" id="content">
+    <div class="content">
         <h1>HornyTube<br>Channels</h1>
         <div class="underline"></div>
 
@@ -187,7 +127,7 @@
             <div class="card-wrapper">
                 <div class="card-title">Manetic</div>
                 <div class="card">
-                    <img src="https://placehold.co/400x250/4a90e2/ffffff?text=Manetic" alt="Manetic placeholder">
+                    <img src="https://placehold.co/400x250/4a90e2/ffffff?text=Manetic" alt="Manetic">
                     <div class="card-body">
                         <h3>Manetic</h3>
                         <p>A channel for man with pussy (FTM / Cuntboy) lovers.</p>
@@ -195,11 +135,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="card-wrapper">
                 <div class="card-title">Futania</div>
                 <div class="card">
-                    <img src="https://placehold.co/400x250/e74c3c/ffffff?text=Futania" alt="Futania placeholder">
+                    <img src="https://placehold.co/400x250/e74c3c/ffffff?text=Futania" alt="Futania">
                     <div class="card-body">
                         <h3>Futania</h3>
                         <p>The best Futa channel</p>
@@ -207,11 +146,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="card-wrapper">
                 <div class="card-title">Manetic Cis</div>
                 <div class="card">
-                    <img src="https://placehold.co/400x250/27ae60/ffffff?text=Manetic+Cis" alt="Manetic Cis placeholder">
+                    <img src="https://placehold.co/400x250/27ae60/ffffff?text=Manetic+Cis" alt="Manetic Cis">
                     <div class="card-body">
                         <h3>Manetic Cis</h3>
                         <p>It's Manetic but with cis men</p>
@@ -219,11 +157,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="card-wrapper">
                 <div class="card-title">PhurryBros</div>
                 <div class="card">
-                    <img src="https://placehold.co/400x250/8e44ad/ffffff?text=PhurryBros" alt="PhurryBros placeholder">
+                    <img src="https://placehold.co/400x250/8e44ad/ffffff?text=PhurryBros" alt="PhurryBros">
                     <div class="card-body">
                         <h3>PhurryBros</h3>
                         <p>Monsters can be pregnant too!</p>
@@ -235,39 +172,36 @@
     </div>
 
     <script>
-    const video = document.getElementById('smoke-video');
-    const loading = document.getElementById('loading');
-    const content = document.getElementById('content');
+        const video = document.getElementById('smoke-video');
+        const loading = document.getElementById('loading');
 
-    video.playbackRate = 0.7;
+        video.playbackRate = 0.7;
 
-    function showPage() {
-        if (loading) loading.classList.add('hidden');
-        if (content) content.classList.add('ready');
-        video.style.opacity = '0.75';
-    }
+        function hideLoading() {
+            loading.classList.add('hidden');
+        }
 
-    // Force play attempts
-    function tryPlay() {
-        video.play().then(() => {
-            console.log('Video playing');
-            showPage();
-        }).catch(err => {
-            console.warn('Play failed:', err);
-            showPage(); // still show the page
+        function forcePlay() {
+            video.play().then(() => {
+                console.log('Video started');
+                hideLoading();
+            }).catch(err => {
+                console.warn('Autoplay blocked or failed:', err);
+                hideLoading();
+            });
+        }
+
+        video.addEventListener('loadeddata', forcePlay);
+        video.addEventListener('canplay', forcePlay);
+        video.addEventListener('error', () => {
+            console.error('Video error:', video.error);
+            hideLoading();
         });
-    }
 
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
-    video.addEventListener('error', (e) => {
-        console.error('Video error:', video.error);
-        showPage();
-    });
-
-    // Extra force after a short delay
-    setTimeout(tryPlay, 1000);
-    setTimeout(tryPlay, 3000);
-</script>
+        // Multiple force attempts
+        setTimeout(forcePlay, 500);
+        setTimeout(forcePlay, 2000);
+        setTimeout(hideLoading, 4000); // always hide loading eventually
+    </script>
 </body>
 </html>

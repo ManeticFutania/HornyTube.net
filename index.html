@@ -142,7 +142,7 @@
         <div class="loading-text">Loading...</div>
     </div>
 
-    <video id="smoke-video" muted loop playsinline preload="auto">
+    <video id="smoke-video" muted loop playsinline autoplay preload="auto">
         <source src="/assets/smoke.mp4" type="video/mp4">
     </video>
 
@@ -211,12 +211,20 @@
         const content = document.getElementById('content');
 
         video.playbackRate = 0.7;
+        video.muted = true;
 
         function showPage() {
             video.classList.add('ready');
             content.classList.add('ready');
             loading.classList.add('hidden');
-            video.play().catch(() => {});
+
+            // Force play multiple times
+            const playVideo = () => {
+                video.play().catch(() => {});
+            };
+            playVideo();
+            setTimeout(playVideo, 300);
+            setTimeout(playVideo, 1000);
         }
 
         window.addEventListener('load', showPage);
